@@ -6,11 +6,25 @@ import './App.css';
 
 const GlobalContext = React.createContext();
 class App extends React.Component {
-  state = {};
+  state = {
+    input: '',
+    ip: '',
+    locName: '',
+    lat: '',
+    lng: '',
+    tzone: '',
+    isp: '',
+  };
 
-  handleInput = () => {};
+  handleInput = (e) => {
+    this.setState = {
+      input: e.target.value,
+    };
+  };
 
-  handleSearch = () => {};
+  handleSearch = (e) => {
+    e.preventDefault();
+  };
 
   render() {
     return (
