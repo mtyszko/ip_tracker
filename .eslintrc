@@ -31,6 +31,8 @@
     "default-case": 0,
     "react/jsx-props-no-spreading": 0,
     "react/no-unescaped-entiti": 0,
-    "react/prefer-stateless-function": 0
+    "react/prefer-stateless-function": 0,
+    // to remove after first dev phase
+    "react/no-unused-state": 0
   }
 }
