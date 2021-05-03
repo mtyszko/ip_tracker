@@ -16,7 +16,7 @@ const Header = styled.header`
   background: url(${bgimg});
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: top center;
+  background-position: center top;
   @media (min-width: 1128px) {
     height: 277px;
   }
