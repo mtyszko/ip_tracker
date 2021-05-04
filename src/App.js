@@ -4,7 +4,7 @@ import Main from 'layouts/Main';
 
 import './App.css';
 
-const GlobalContext = React.createContext();
+export const GlobalContext = React.createContext();
 class App extends React.Component {
   state = {
     input: '',
@@ -16,21 +16,21 @@ class App extends React.Component {
     lng: '',
     tzone: '',
     isp: '',
-  };
-
-  handleInput = (e) => {
-    this.setState = {
-      input: e.target.value,
-    };
-  };
-
-  handleSearch = (e) => {
-    e.preventDefault();
+    handleInput: (e) => {
+      this.setState({
+        input: e.target.value,
+      });
+    },
+    handleSearch: (e) => {
+      e.preventDefault();
+    },
   };
 
   render() {
+    const { handleInput, handleSearch, input } = this.state;
+
     return (
-      <GlobalContext.Provider value={(this.handleInput, this.handleSearch)}>
+      <GlobalContext.Provider value={{ handleInput, handleSearch, input }}>
         <Main />
       </GlobalContext.Provider>
     );

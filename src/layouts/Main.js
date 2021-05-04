@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import Search from 'components/search/Search';
+
 import bgimg from 'assets/pattern-bg.png';
 
 const Wrapper = styled.div`
@@ -29,7 +31,9 @@ const MapContainer = styled.section`
 
 const Main = () => (
   <Wrapper>
-    <Header />
+    <Header>
+      <Search />
+    </Header>
     <MapContainer />
   </Wrapper>
 );
