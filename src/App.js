@@ -8,6 +8,8 @@ const GlobalContext = React.createContext();
 class App extends React.Component {
   state = {
     input: '',
+    loading: false,
+    err: '',
     ip: '',
     locName: '',
     lat: '',
