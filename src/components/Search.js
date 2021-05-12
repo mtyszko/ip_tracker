@@ -52,13 +52,13 @@ const Search = () => (
   <GlobalContext.Consumer>
     {({ handleInput, handleSearch, input }) => (
       <Wrapper>
-        <Form /* onSubmit={handleSearch} */>
+        <Form onSubmit={handleSearch}>
           <Input
             type='text'
             name='search'
             value={input}
             placeholder='search IP number'
-            // onChange={handleInput}
+            onChange={handleInput}
           />
           <Btn />
         </Form>
