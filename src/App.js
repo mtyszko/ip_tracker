@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import axios from 'axios';
 
 import Main from 'layouts/Main';
@@ -8,10 +8,11 @@ import './App.css';
 import { ipifyBaseUrl } from 'utils/vars';
 
 export const GlobalContext = React.createContext();
-class App extends React.Component {
-  state = {
-    input: '',
-    loading: false,
+
+export default function App() {
+  const [loading, setLoading] = useState(false);
+  const [input, setInput] = useState('');
+  const [data, setData] = useState({
     err: '',
     ip: '',
     locName: '',
@@ -19,55 +20,47 @@ class App extends React.Component {
     lng: '',
     timezone: '',
     isp: '',
+  });
 
-    handleInput: (e) => {
-      this.setState({
-        input: e.target.value,
-      });
-    },
-
-    handleSearch: async (e) => {
-      this.setState({ loading: true });
-      e.preventDefault();
-      console.log(this.state.input);
-      try {
-        const res = await axios.get(`${ipifyBaseUrl}${this.state.input}`);
-
-        const {
-          data: {
-            ip,
-            location: { city, lat, lng, region, timezone },
-            isp,
-          },
-        } = res;
-
-        this.setState({
-          loading: false,
-          err: '',
-          ip,
-          locName: `${city}, ${region}`,
-          lat,
-          lng,
-          timezone,
-          isp,
-        });
-      } catch (err) {
-        this.setState({
-          loading: false,
-          err: 'Input correct IPv4 or IPv6 address.',
-        });
-      }
-    },
-  };
-
-  render() {
-    const { handleInput, handleSearch, input } = this.state;
-
-    return (
-      <GlobalContext.Provider value={{ handleInput, handleSearch, input }}>
-        <Main />
-      </GlobalContext.Provider>
-    );
+  function handleInput(e) {
+    return setInput(e.target.value);
   }
+
+  async function handleSearch(e) {
+    e.preventDefault();
+    console.log(input);
+    setLoading(true);
+
+    try {
+      const res = await axios.get(`${ipifyBaseUrl}${input}`);
+
+      const {
+        data: {
+          ip,
+          location: { city, lat, lng, region, timezone },
+          isp,
+        },
+      } = res;
+
+      setData({
+        err: '',
+        ip,
+        locName: `${city}, ${region}`,
+        lat,
+        lng,
+        timezone,
+        isp,
+      });
+      setLoading(false);
+    } catch (err) {
+      setData({ err: 'Input correct IPv4 or IPv6 address.' });
+      setLoading(false);
+    }
+  }
+
+  return (
+    <GlobalContext.Provider value={{ handleInput, handleSearch, input }}>
+      <Main />
+    </GlobalContext.Provider>
+  );
 }
-export default App;
