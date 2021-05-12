@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import Search from 'components/Search';
+import Map from 'components/Map';
 
 import bgimg from 'assets/pattern-bg.png';
 
@@ -24,7 +25,7 @@ const Header = styled.header`
   }
 `;
 
-const MapContainer = styled.section`
+const MapWrapper = styled.section`
   height: 100%;
   background-color: mediumaquamarine;
 `;
@@ -34,7 +35,9 @@ const Main = () => (
     <Header>
       <Search />
     </Header>
-    <MapContainer />
+    <MapWrapper>
+      <Map />
+    </MapWrapper>
   </Wrapper>
 );
 
