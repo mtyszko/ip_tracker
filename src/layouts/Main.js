@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import Search from 'components/Search';
-import Map from 'components/Map';
+import MapBox from 'components/MapBox';
 
 import bgimg from 'assets/pattern-bg.png';
 
@@ -36,7 +36,7 @@ const Main = () => (
       <Search />
     </Header>
     <MapWrapper>
-      <Map />
+      <MapBox />
     </MapWrapper>
   </Wrapper>
 );

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled, { css } from 'styled-components';
 
-import { GlobalContext } from 'App';
+import { InputContext } from 'App';
+
 import icon from 'assets/icon-arrow.svg';
 
 const Wrapper = styled.section`
@@ -48,23 +49,21 @@ const Btn = styled.button`
   }
 `;
 
-const Search = () => (
-  <GlobalContext.Consumer>
-    {({ handleInput, handleSearch, input }) => (
-      <Wrapper>
-        <Form onSubmit={handleSearch}>
-          <Input
-            type='text'
-            name='search'
-            value={input}
-            placeholder='search IP number'
-            onChange={handleInput}
-          />
-          <Btn />
-        </Form>
-      </Wrapper>
-    )}
-  </GlobalContext.Consumer>
-);
+export default function Search() {
+  const { handleSearch, handleInput, input } = useContext(InputContext);
 
-export default Search;
+  return (
+    <Wrapper>
+      <Form onSubmit={handleSearch}>
+        <Input
+          type='text'
+          name='search'
+          value={input}
+          placeholder='search IP number'
+          onChange={handleInput}
+        />
+        <Btn />
+      </Form>
+    </Wrapper>
+  );
+}

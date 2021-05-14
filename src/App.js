@@ -7,17 +7,20 @@ import './App.css';
 
 import { ipifyBaseUrl } from 'utils/vars';
 
-export const GlobalContext = React.createContext();
+export const InputContext = React.createContext();
+export const DataContext = React.createContext();
 
 export default function App() {
   const [loading, setLoading] = useState(false);
+
   const [input, setInput] = useState('');
+
   const [data, setData] = useState({
     err: '',
     ip: '',
     locName: '',
-    lat: '',
-    lng: '',
+    lat: '52.231667',
+    lng: '21.006389',
     timezone: '',
     isp: '',
   });
@@ -51,16 +54,27 @@ export default function App() {
         timezone,
         isp,
       });
+
       setLoading(false);
     } catch (err) {
-      setData({ err: 'Input correct IPv4 or IPv6 address.' });
+      setData((prevState) => ({
+        ...prevState,
+        err: 'Input correct IPv4 or IPv6 address.',
+        ip: '',
+        locName: '',
+        timezone: '',
+        isp: '',
+      }));
+
       setLoading(false);
     }
   }
 
   return (
-    <GlobalContext.Provider value={{ handleInput, handleSearch, input }}>
-      <Main />
-    </GlobalContext.Provider>
+    <InputContext.Provider value={{ handleInput, handleSearch, input }}>
+      <DataContext.Provider value={{ data }}>
+        <Main />
+      </DataContext.Provider>
+    </InputContext.Provider>
   );
 }
