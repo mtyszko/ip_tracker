@@ -2,6 +2,7 @@ import React, { Component, useState } from 'react';
 import axios from 'axios';
 
 import Main from 'layouts/Main';
+import Loading from 'components/Loading';
 
 import './App.css';
 
@@ -72,8 +73,9 @@ export default function App() {
 
   return (
     <InputContext.Provider value={{ handleInput, handleSearch, input }}>
-      <DataContext.Provider value={{ data }}>
+      <DataContext.Provider value={{ data, loading }}>
         <Main />
+        {loading ? <Loading /> : null}
       </DataContext.Provider>
     </InputContext.Provider>
   );
