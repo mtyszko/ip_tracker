@@ -1,13 +1,14 @@
 import React, { useContext } from 'react';
 import styled, { css } from 'styled-components';
 
-import { InputContext } from 'App';
+import { InputContext, DataContext } from 'App';
 
 import icon from 'assets/icon-arrow.svg';
 
 const Wrapper = styled.section`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   width: 100%;
   height: 100%;
 `;
@@ -49,8 +50,19 @@ const Btn = styled.button`
   }
 `;
 
+const ErrMsg = styled.div`
+  align-self: center;
+  width: clamp(278px, 70vw, 558px);
+  padding: 5px 0;
+  font-size: 11px;
+  color: hsla(1, 100%, 50%, 1);
+`;
+
 export default function Search() {
   const { handleSearch, handleInput, input } = useContext(InputContext);
+  const {
+    data: { err },
+  } = useContext(DataContext);
 
   return (
     <Wrapper>
@@ -64,6 +76,7 @@ export default function Search() {
         />
         <Btn />
       </Form>
+      {err ? <ErrMsg>*{err}</ErrMsg> : null}
     </Wrapper>
   );
 }
