@@ -29,7 +29,7 @@ export default function MapBox() {
   return (
     <Container>
       <Map
-        style='mapbox://styles/mapbox/streets-v9' // eslint-disable-line
+        style='mapbox://styles/mapbox/streets-v11' // eslint-disable-line
         containerStyle={{
           height: '100%',
           width: '100%',
