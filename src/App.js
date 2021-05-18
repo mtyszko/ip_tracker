@@ -20,10 +20,16 @@ export default function App() {
     err: '',
     ip: '',
     locName: '',
-    lat: '52.231667',
-    lng: '21.006389',
     timezone: '',
     isp: '',
+  });
+
+  const [viewport, setViewport] = useState({
+    latitude: 52.231667,
+    longitude: 21.006389,
+    zoom: 14,
+    width: '100%',
+    height: '100%',
   });
 
   function handleInput(e) {
@@ -32,7 +38,7 @@ export default function App() {
 
   async function handleSearch(e) {
     e.preventDefault();
-    console.log(input);
+
     setLoading(true);
 
     try {
@@ -50,10 +56,14 @@ export default function App() {
         err: '',
         ip,
         locName: `${city}, ${region}`,
-        lat,
-        lng,
         timezone,
         isp,
+      });
+
+      setViewport({
+        ...viewport,
+        latitude: lat,
+        longitude: lng,
       });
 
       setLoading(false);
@@ -73,7 +83,7 @@ export default function App() {
 
   return (
     <InputContext.Provider value={{ handleInput, handleSearch, input }}>
-      <DataContext.Provider value={{ data, loading }}>
+      <DataContext.Provider value={{ data, loading, viewport }}>
         <Main />
         {loading ? <Loading /> : null}
       </DataContext.Provider>

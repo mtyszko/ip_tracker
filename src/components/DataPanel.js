@@ -82,7 +82,7 @@ export default function DataPanel() {
   return (
     <Wrapper>
       {contentData.map(({ label, content }) => (
-        <InfoItem>
+        <InfoItem key={label}>
           <Label>{label}</Label>
           <Content>{content || '-'}</Content>
         </InfoItem>
